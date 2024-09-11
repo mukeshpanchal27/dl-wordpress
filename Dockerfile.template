@@ -40,6 +40,7 @@ WORKDIR /var/www/html
 {{ ) end -}}
 
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
+# Note: imagick uses libheif for AVIF support, whereas GD uses libavif for AVIF support
 RUN set -ex; \
 	\
 {{ if is_alpine then ( -}}
@@ -51,6 +52,8 @@ RUN set -ex; \
 		libjpeg-turbo-dev \
 		libpng-dev \
 		libwebp-dev \
+		libheif-dev \
+		libavif-dev \
 		libzip-dev \
 	; \
 {{ ) else ( -}}
@@ -72,6 +75,7 @@ RUN set -ex; \
 		--with-freetype \
 		--with-jpeg \
 		--with-webp \
+		--with-avif \
 	; \
 	docker-php-ext-install -j "$(nproc)" \
 		bcmath \
