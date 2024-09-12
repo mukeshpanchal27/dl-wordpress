@@ -32,6 +32,7 @@ RUN set -ex; \
 	; \
 	\
 	docker-php-ext-configure gd \
+		--with-avif \
 		--with-freetype \
 		--with-jpeg \
 		--with-webp \
