@@ -48,12 +48,11 @@ RUN set -ex; \
 		$PHPIZE_DEPS \
 		freetype-dev \
 		icu-dev \
-		imagemagick-dev \
+		imagemagick-dev libheif-dev \
+		libavif-dev \
 		libjpeg-turbo-dev \
 		libpng-dev \
 		libwebp-dev \
-		libheif-dev \
-		libavif-dev \
 		libzip-dev \
 	; \
 {{ ) else ( -}}
@@ -72,10 +71,10 @@ RUN set -ex; \
 {{ ) end -}}
 	\
 	docker-php-ext-configure gd \
+		--with-avif \
 		--with-freetype \
 		--with-jpeg \
 		--with-webp \
-		--with-avif \
 	; \
 	docker-php-ext-install -j "$(nproc)" \
 		bcmath \
